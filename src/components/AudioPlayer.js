@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const AudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useState('');
-  const [audio] = useState(new Audio('https://44.216.127.114/stream'));
+  const [audio] = useState(new Audio('https://goa4ever.ilovemijgun.com/stream'));
 
   useEffect(() => {
     const playAudio = async () => {
