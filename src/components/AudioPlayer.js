@@ -5,7 +5,14 @@ const AudioPlayer = () => {
   const [audio] = useState(new Audio('http://44.216.127.114:8000/stream'));
 
   useEffect(() => {
-    audio.play();
+    const playAudio = async () => {
+      try {
+        await audio.play();
+      } catch (e) {
+        console.log('Autoplay was prevented, enabling manual play.');
+      }
+    };
+    playAudio();
     return () => {
       audio.pause();
     };
@@ -21,10 +28,18 @@ const AudioPlayer = () => {
       });
   }, []);
 
+  const handlePlay = async () => {
+    try {
+      await audio.play();
+    } catch (e) {
+      console.log('Play button triggered but failed to start:', e);
+    }
+  };
+
   return (
     <div>
       <h2>Now Playing: {currentTrack}</h2>
-      <button onClick={() => audio.play()}>Play</button>
+      <button onClick={handlePlay}>Play</button>
       <button onClick={() => audio.pause()}>Pause</button>
     </div>
   );
