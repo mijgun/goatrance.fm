@@ -1,39 +1,45 @@
-.App {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: #000000;
+  color: #FFFFFF;
   text-align: center;
-  background-color: #1a1a1a;
-  color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.App-header {
-  font-family: 'Arial', sans-serif;
+.app-header {
+  background: linear-gradient(45deg, #1E90FF, #32CD32);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: 20px;
 }
 
 h1 {
   font-size: 3em;
-  margin-bottom: 20px;
+  margin: 0;
+  padding: 10px;
+  color: #FF69B4;
+  text-shadow: 0 0 10px #1E90FF;
 }
 
 p {
   font-size: 1.5em;
-  margin-bottom: 20px;
+  margin: 10px 0;
+  color: #FFA500;
 }
 
 .play-button {
-  background-color: #f39c12;
-  color: white;
+  background: linear-gradient(45deg, #32CD32, #FFA500);
   border: none;
-  padding: 15px 30px;
+  border-radius: 5px;
+  color: #FFFFFF;
   font-size: 1.5em;
-  border-radius: 30px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  box-shadow: 0 0 5px #32CD32, 0 0 10px #FFA500;
 }
 
 .play-button:hover {
-  background-color: #e67e22;
+  box-shadow: 0 0 20px #32CD32, 0 0 25px #FFA500;
 }
