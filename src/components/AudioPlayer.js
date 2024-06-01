@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const AudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useState('');
-  const [audio] = useState(new Audio('http://44.216.127.114:8000/stream'));
+  const [audio] = useState(new Audio('https://44.216.127.114/stream'));
 
   useEffect(() => {
     const playAudio = async () => {
@@ -25,7 +25,8 @@ const AudioPlayer = () => {
         if (data && data.title) {
           setCurrentTrack(data.title);
         }
-      });
+      })
+      .catch(error => console.log('Error fetching current track:', error));
   }, []);
 
   const handlePlay = async () => {
