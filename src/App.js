@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import './App.css';
 
-const App = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audio = new Audio('https://goa4ever.ilovemijgun.com:8443/stream');
+function App() {
+  const audioRef = useRef(null);
 
-  const togglePlayPause = () => {
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play();
+  const handlePlay = () => {
+    if (audioRef.current) {
+      audioRef.current.src = 'https://goa4ever.ilovemijgun.com:8443/stream';
+      audioRef.current.play().catch(error => {
+        console.error("Error playing the audio: ", error);
+      });
     }
-    setIsPlaying(!isPlaying);
+  };
+
+  const handlePause = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Goa4Ever Radio</h1>
-        <p>Now Playing:</p>
-        <button onClick={togglePlayPause}>
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
+        <audio ref={audioRef} controls />
+        <div>
+          <button onClick={handlePlay}>Play</button>
+          <button onClick={handlePause}>Pause</button>
+        </div>
       </header>
     </div>
   );
-};
+}
 
 export default App;
