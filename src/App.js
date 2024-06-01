@@ -1,14 +1,13 @@
 import React from 'react';
-import './App.css';
 import AudioPlayer from './components/AudioPlayer';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Goa4Ever Radio</h1>
-        <AudioPlayer />
+        <h1>Welcome to My Radio App</h1>
       </header>
+      <AudioPlayer />
     </div>
   );
 }
