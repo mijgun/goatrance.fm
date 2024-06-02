@@ -1,15 +1,20 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { METADATA_URL } from './config';
 
-const container = document.getElementById('root');
-const root = createRoot(container);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+async function fetchMetadata() {
+  try {
+    const response = await fetch(METADATA_URL);
+    const data = await response.json();
+    document.getElementById('track-title').textContent = data.track || '';
+    document.getElementById('artist-name').textContent = data.artist || '';
+  } catch (error) {
+    console.error('Error fetching metadata:', error);
+  }
+}
 
-reportWebVitals();
+fetchMetadata();
+setInterval(fetchMetadata, 30000);
+
+ReactDOM.render(<App />, document.getElementById('root'));

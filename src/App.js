@@ -2,33 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import './FractalBackground.css';
 import { ICECAST_URL, METADATA_URL } from './config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [trackTitle, setTrackTitle] = useState('Track Title');
-  const [artist, setArtist] = useState('Artist Name');
   const audio = new Audio(ICECAST_URL);
-
-  useEffect(() => {
-    const fetchMetadata = async () => {
-      try {
-        const response = await fetch(METADATA_URL);
-        const data = await response.json();
-        setTrackTitle(data.title);
-        setArtist(data.artist);
-      } catch (error) {
-        console.error('Error fetching metadata:', error);
-      }
-    };
-
-    if (isPlaying) {
-      fetchMetadata();
-
-      const intervalId = setInterval(fetchMetadata, 30000);
-
-      return () => clearInterval(intervalId);
-    }
-  }, [isPlaying]);
 
   useEffect(() => {
     const panels = document.querySelectorAll('#anim_panel_1, #anim_panel_2, #anim_panel_3');
@@ -37,7 +16,7 @@ function App() {
       const translateX = Math.random() * 2000 - 1000 + 'px';
       const translateY = Math.random() * 2000 - 1000 + 'px';
       const rotate = Math.random() * 360 + 'deg';
-      const rotateSpeed = Math.random() * 100 + 50 + 's'; // Рандомная скорость вращения
+      const rotateSpeed = Math.random() * 100 + 50 + 's'; // Random rotation speed
 
       panel.style.animationDuration = duration;
       panel.style.animationName = `translate-rotate-${panel.id}`;
@@ -69,11 +48,16 @@ function App() {
   }, []);
 
   const handlePlay = () => {
-    audio.play().then(() => {
-      setIsPlaying(true);
-    }).catch(error => {
-      console.error("Error playing the audio: ", error);
-    });
+    if (!isPlaying) {
+      audio.play().then(() => {
+        setIsPlaying(true);
+      }).catch(error => {
+        console.error("Error playing the audio: ", error);
+      });
+    } else {
+      audio.pause();
+      setIsPlaying(false);
+    }
   };
 
   return (
@@ -84,11 +68,7 @@ function App() {
         <div id="anim_panel_3"></div>
       </div>
       <header className="app-header">
-        <div className="track-info">
-          <div>{trackTitle}</div>
-          <div>{artist}</div>
-        </div>
-        {!isPlaying && <button className="play-button" onClick={handlePlay}>Play</button>}
+        <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} onClick={handlePlay} className="play-icon" />
       </header>
     </div>
   );
