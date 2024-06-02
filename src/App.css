@@ -4,47 +4,61 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  background: #000000;
+  background: #000000; /* Устанавливаем черный фон */
   color: #FFFFFF;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Изменено с center на flex-start */
+  justify-content: center;
   height: 100vh;
   text-align: center;
+  overflow: hidden;
 }
 
 #track-container {
   width: 100%;
   padding: 20px;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для лучшей видимости текста */
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  position: absolute;
+  top: 10%; /* Позиционируем трек сверху */
+  left: 50%;
+  transform: translateX(-50%); /* Центрируем контейнер */
+}
+
+.track-info {
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 auto; /* Центрируем текст */
 }
 
 .track-title {
-  font-size: 2em;
+  font-size: 3em;
   color: #FFFFFF;
 }
 
 .artist-name {
-  font-size: 1.5em;
+  font-size: 2em;
   color: #FFFFFF;
+  margin-top: 0.5em;
+  font-weight: bold;
 }
 
-.app-header {
-  background: transparent;
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 80px); /* Заменить высоту с учетом track-container */
+.play-container {
+  z-index: 1;
+  position: absolute;
+  top: 50%; /* Позиционируем кнопку в центре */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Центрируем контейнер по оси X и Y */
 }
 
 .play-icon {
-  font-size: 192px; /* Увеличиваем размер в 3 раза */
+  font-size: 192px;
   color: #fff;
   cursor: pointer;
 }

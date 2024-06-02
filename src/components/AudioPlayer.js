@@ -1,16 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ICECAST_URL, METADATA_URL } from '../config';
 
-const AudioPlayer = () => {
+const AudioPlayer = ({ isPlaying }) => {
   const audioRef = useRef(null);
-  const [metadata, setMetadata] = useState({ title: '', artist: '' });
 
   useEffect(() => {
     const fetchMetadata = async () => {
       try {
         const response = await fetch(METADATA_URL);
-        const data = await response.json();
-        setMetadata(data);
+        await response.json();
       } catch (error) {
         console.error('Error fetching metadata:', error);
       }
@@ -22,18 +20,17 @@ const AudioPlayer = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const playAudio = () => {
-    audioRef.current.play();
-  };
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
 
   return (
     <div>
-      <audio ref={audioRef} src={ICECAST_URL} controls />
-      <button onClick={playAudio}>Play</button>
-      <div>
-        <h2>Now Playing:</h2>
-        <p>{metadata.artist} - {metadata.title}</p>
-      </div>
+      <audio ref={audioRef} src={ICECAST_URL} />
     </div>
   );
 };
