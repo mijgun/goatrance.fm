@@ -1,18 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/* Импортируем шрифт Roboto из Google Fonts */
 
 body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  background: #000000; /* Устанавливаем черный фон */
+  /* Устанавливаем семейство шрифтов для всего документа */
+  background: #000000;
+  /* Устанавливаем черный фон для всего документа */
   color: #FFFFFF;
+  /* Устанавливаем белый цвет текста */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* Используем flex-контейнер для центрирования содержимого */
   height: 100vh;
+  /* Устанавливаем высоту контейнера на 100% от высоты видимого окна */
   text-align: center;
+  /* Центрируем текст */
   overflow: hidden;
+  /* Скрываем элементы, выходящие за границы контейнера */
 }
 
 #track-container {
@@ -20,11 +28,15 @@ body {
   padding: 20px;
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
+  /* Устанавливаем полупрозрачный черный фон для контейнера */
   z-index: 1;
+  /* Устанавливаем приоритет отображения над другими элементами */
   position: absolute;
-  top: 10%; /* Позиционируем трек сверху */
+  top: 10%;
+  /* Позиционируем контейнер на 10% сверху */
   left: 50%;
-  transform: translateX(-50%); /* Центрируем контейнер */
+  transform: translateX(-50%);
+  /* Центрируем контейнер по горизонтали */
 }
 
 .track-info {
@@ -34,12 +46,15 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0 auto; /* Центрируем текст */
+  /* Обеспечиваем, что текст не будет переноситься и будет обрезаться с троеточием, если не помещается */
+  margin: 0 auto;
+  /* Центрируем текст */
 }
 
 .track-title {
   font-size: 3em;
   color: #FFFFFF;
+  /* Устанавливаем большой белый шрифт для названия трека */
 }
 
 .artist-name {
@@ -47,18 +62,22 @@ body {
   color: #FFFFFF;
   margin-top: 0.5em;
   font-weight: bold;
+  /* Устанавливаем меньший шрифт для имени исполнителя и делаем его жирным */
 }
 
 .play-container {
   z-index: 1;
   position: absolute;
-  top: 50%; /* Позиционируем кнопку в центре */
+  top: 50%;
+  /* Позиционируем кнопку по центру экрана */
   left: 50%;
-  transform: translate(-50%, -50%); /* Центрируем контейнер по оси X и Y */
+  transform: translate(-50%, -50%);
+  /* Центрируем контейнер по оси X и Y */
 }
 
 .play-icon {
   font-size: 192px;
   color: #fff;
   cursor: pointer;
+  /* Устанавливаем крупную белую иконку с возможностью клика */
 }
