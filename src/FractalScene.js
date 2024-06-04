@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
 
 const FractalScene = () => {
   const canvasRef = useRef();
@@ -126,7 +125,7 @@ const FractalScene = () => {
 
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
         const info = gl.getShaderInfoLog(shader);
-        throw `Could not compile WebGL program. \n\n ${info}`;
+        throw new Error(`Could not compile WebGL program. \n\n ${info}`);
       }
       return shader;
     };
@@ -143,7 +142,7 @@ const FractalScene = () => {
 
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       const info = gl.getProgramInfoLog(program);
-      throw `Could not compile WebGL program. \n\n ${info}`;
+      throw new Error(`Could not compile WebGL program. \n\n ${info}`);
     }
 
     gl.useProgram(program);

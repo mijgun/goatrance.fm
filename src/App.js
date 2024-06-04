@@ -33,13 +33,11 @@ function App() {
       <FractalScene /> {/* Добавляем компонент WebGL сцены */}
       <div id="track-container">
         <div className="track-info">
-          {trackTitle && artist ? (
+          {trackTitle && artist && (
             <>
               <div className="track-title">{trackTitle}</div>
               <div className="artist-name">{artist}</div>
             </>
-          ) : (
-            <div className="track-title">Loading...</div>
           )}
         </div>
       </div>
