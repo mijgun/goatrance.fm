@@ -3,8 +3,7 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import AudioPlayer from './components/AudioPlayer';
-import { fetchInitialMetadata } from './initialMetadata';
-import FractalScene from './FractalScene'; // Импортируем наш новый компонент
+import FractalScene from './FractalScene';
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -12,16 +11,40 @@ function App() {
   const [artist, setArtist] = useState('');
 
   useEffect(() => {
-    const loadMetadata = async () => {
-      const initialMetadata = await fetchInitialMetadata();
-      setTrackTitle(initialMetadata.track);
-      setArtist(initialMetadata.artist);
+    let websocket;
+
+    const connectWebSocket = () => {
+      console.log('Connecting to WebSocket');
+      websocket = new WebSocket('wss://stream.goatrance.fm');
+
+      websocket.onopen = () => {
+        console.log('Connected to WebSocket');
+      };
+
+      websocket.onmessage = (event) => {
+        console.log('Message received from WebSocket', event.data);
+        const data = JSON.parse(event.data);
+        setTrackTitle(data.track);
+        setArtist(data.artist);
+      };
+
+      websocket.onclose = (event) => {
+        console.log(`Disconnected from WebSocket, code: ${event.code}, reason: ${event.reason}, wasClean: ${event.wasClean}`);
+        setTimeout(connectWebSocket, 10000);
+      };
+
+      websocket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+      };
     };
 
-    loadMetadata();
+    connectWebSocket();
 
-    const intervalId = setInterval(loadMetadata, 30000);
-    return () => clearInterval(intervalId);
+    return () => {
+      if (websocket) {
+        websocket.close();
+      }
+    };
   }, []);
 
   const handlePlayPause = () => {
@@ -30,7 +53,7 @@ function App() {
 
   return (
     <div className="App">
-      <FractalScene /> {/* Добавляем компонент WebGL сцены */}
+      <FractalScene />
       <div id="track-container">
         <div className="track-info">
           {trackTitle && artist && (
