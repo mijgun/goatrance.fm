@@ -1,31 +1,21 @@
-body {
+body, html {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  /* Устанавливает семейство шрифтов для всего документа */
-  -webkit-font-smoothing: antialiased;
-  /* Включает сглаживание шрифтов для браузера на основе WebKit */
-  -moz-osx-font-smoothing: grayscale;
-  /* Включает сглаживание шрифтов для macOS в браузерах на основе Gecko */
-  background: #000000;
-  /* Устанавливает черный фон для всего документа */
+  overflow: hidden;
+  background: black;
+}
+
+.App {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  /* Устанавливает flex-контейнер с вертикальным направлением, центровкой по горизонтали и началом по вертикали */
   height: 100vh;
-  /* Устанавливает высоту контейнера на 100% от высоты видимого окна */
   text-align: center;
-  /* Центрирует текст */
-  overflow: hidden;
-  /* Скрывает элементы, выходящие за границы контейнера */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-  /* Устанавливает семейство шрифтов для элементов <code> */
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
 }

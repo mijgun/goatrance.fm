@@ -27,8 +27,8 @@ body {
   width: 100%;
   padding: 20px;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
-  /* Устанавливаем полупрозрачный черный фон для контейнера */
+  background: transparent;
+  /* Убираем фон у контейнера */
   z-index: 1;
   /* Устанавливаем приоритет отображения над другими элементами */
   position: absolute;

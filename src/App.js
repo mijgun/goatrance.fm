@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import AudioPlayer from './components/AudioPlayer';
 import { fetchInitialMetadata } from './initialMetadata';
+import FractalScene from './FractalScene'; // Импортируем наш новый компонент
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <div className="App">
+      <FractalScene /> {/* Добавляем компонент WebGL сцены */}
       <div id="track-container">
         <div className="track-info">
           {trackTitle && artist ? (
