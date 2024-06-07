@@ -80,7 +80,7 @@ function App() {
           <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} onClick={handlePlayPause} className="play-icon" />
         </div>
       </div>
-      <AudioPlayer isPlaying={isPlaying} />
+      <AudioPlayer isPlaying={isPlaying} trackTitle={trackTitle} artist={artist} />
     </div>
   );
 }
