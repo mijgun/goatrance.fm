@@ -4,11 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import AudioPlayer from './components/AudioPlayer';
 import FractalScene from './FractalScene';
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackTitle, setTrackTitle] = useState('');
   const [artist, setArtist] = useState('');
+
+  const location = useLocation();
 
   useEffect(() => {
     let websocket;
@@ -47,6 +50,14 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag('config', 'G-H3FF3GW1G9', {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location]);
+
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
   };
@@ -64,8 +75,10 @@ function App() {
           )}
         </div>
       </div>
-      <div className="play-container">
-        <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} onClick={handlePlayPause} className="play-icon" />
+      <div className="controls-container">
+        <div className="play-container">
+          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} onClick={handlePlayPause} className="play-icon" />
+        </div>
       </div>
       <AudioPlayer isPlaying={isPlaying} />
     </div>

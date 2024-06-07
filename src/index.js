@@ -1,24 +1,37 @@
 import React from 'react';
-// Импортируем библиотеку React
-
 import { createRoot } from 'react-dom/client';
-// Импортируем метод createRoot из пакета react-dom для рендеринга приложения
-
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
-// Импортируем главный компонент приложения App
-
 import './index.css';
-// Импортируем файл стилей index.css
 
 const container = document.getElementById('root');
-// Получаем элемент DOM с id 'root', который будет контейнером для нашего React-приложения
-
 const root = createRoot(container);
-// Создаем корень для рендеринга нашего React-приложения
+
+// Добавляем скрипт для Google Analytics
+const addGoogleAnalytics = () => {
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=G-H3FF3GW1G9`;
+  document.head.appendChild(script);
+
+  script.onload = () => {
+    const inlineScript = document.createElement('script');
+    inlineScript.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-H3FF3GW1G9');
+    `;
+    document.head.appendChild(inlineScript);
+  };
+};
+
+addGoogleAnalytics();
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>
 );
-// Рендерим компонент App внутри StrictMode для выявления потенциальных проблем в приложении
